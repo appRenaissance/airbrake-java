@@ -9,8 +9,6 @@ import static java.text.MessageFormat.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import airbrake.NoticeXml;
-
 public class iOSBacktraceLine implements BacktraceLine {
 
 	private String crashLocation;
