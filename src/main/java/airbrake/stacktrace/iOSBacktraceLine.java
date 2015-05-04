@@ -66,11 +66,11 @@ public class iOSBacktraceLine implements BacktraceLine {
 	public String toXml() {
 		String attrs = null;
 		if(showMemAddress) {
-			attrs = format("method=\"{0} {1} + {2}\" file=\"{3}\" number=\"\"", memAddress, command, offset, crashLocation);
+			attrs = format("method=\"{0} {1} + {2}\" file=\"{3}\" number=\"\"", NoticeXml.escapeXml(memAddress), NoticeXml.escapeXml(command), NoticeXml.escapeXml(offset), NoticeXml.escapeXml(crashLocation));
 		} else {
-			attrs = format("method=\"{0} + {1}\" file=\"{2}\" number=\"\"", command, offset, crashLocation);
+			attrs = format("method=\"{0} + {1}\" file=\"{2}\" number=\"\"", NoticeXml.escapeXml(command), NoticeXml.escapeXml(offset), NoticeXml.escapeXml(crashLocation));
 		}
 		
-		return format("<line {0}/>", NoticeXml.escapeXml(attrs));
+		return format("<line {0}/>", attrs);
 	}
 }
