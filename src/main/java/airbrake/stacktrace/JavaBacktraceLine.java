@@ -97,6 +97,7 @@ public class JavaBacktraceLine implements BacktraceLine {
 
 	@Override
 	public String toXml() {
-		return format("<line method=\"{0}.{1}\" file=\"{2}\" number=\"{3}\"/>", className, methodName, fileName, lineNumber);
+		String attrs = format("method=\"{0}.{1}\" file=\"{2}\" number=\"{3}\"", className, methodName, fileName, lineNumber);
+		return format("<line {0}/>", NoticeXml.escapeXml(attrs));
 	}
 }

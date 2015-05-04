@@ -9,6 +9,8 @@ import static java.text.MessageFormat.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import airbrake.NoticeXml;
+
 public class iOSBacktraceLine implements BacktraceLine {
 
 	private String crashLocation;
@@ -62,13 +64,13 @@ public class iOSBacktraceLine implements BacktraceLine {
 
 	@Override
 	public String toXml() {
-		String s = null;
+		String attrs = null;
 		if(showMemAddress) {
-			s = format("<line method=\"{0} {1} + {2}\" file=\"{3}\" number=\"\"/>", memAddress, command, offset, crashLocation);
+			attrs = format("method=\"{0} {1} + {2}\" file=\"{3}\" number=\"\"", memAddress, command, offset, crashLocation);
 		} else {
-			s = format("<line method=\"{0} + {1}\" file=\"{2}\" number=\"\"/>", command, offset, crashLocation);
+			attrs = format("method=\"{0} + {1}\" file=\"{2}\" number=\"\"", command, offset, crashLocation);
 		}
 		
-		return s;
+		return format("<line {0}/>", NoticeXml.escapeXml(attrs));
 	}
 }
