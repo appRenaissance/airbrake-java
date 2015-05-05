@@ -48,7 +48,7 @@ public class JavaBacktraceLine implements BacktraceLine {
 	}
 
 	private String fileName(String line) {
-		return NoticeXml.escapeXml(line.replaceAll("^.*\\(", "").replaceAll(":.*", ""));
+		return line.replaceAll("^.*\\(", "").replaceAll(":.*", "");
 	}
 
 	private String methodName(String classAndMethodName) {

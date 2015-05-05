@@ -76,6 +76,26 @@ public class NoticeApiXmlTest {
 	public void testNotifierVersion() {
 		assertThat(xml(new NoticeXml(notice)), containsString("<version><![CDATA[2.2]]></version>"));
 	}
+	
+	@Test
+	public void testEscapeXmlAngleBrackets() {
+		assertEquals(NoticeXml.escapeXml("<foo/>"), "&#60;foo/&#62;");
+	}
+	
+	@Test
+	public void testEscapeXmlDoubleQuotes() {
+		assertEquals(NoticeXml.escapeXml("\"foo\""), "&#34;foo&#34;");
+	}
+	
+	@Test
+	public void testEscapeXmlSingleQuotes() {
+		assertEquals(NoticeXml.escapeXml("'foo'"), "&#39;foo&#39;");
+	}
+	
+	@Test
+	public void testEscapeXmlAmpersand() {
+		assertEquals(NoticeXml.escapeXml("&foo"), "&#38;foo");
+	}
 
 	private String xml(NoticeXml noticeApi) {
 		return clean(noticeApi.toString());

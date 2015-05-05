@@ -6,6 +6,7 @@ import org.junit.*;
 
 import airbrake.stacktrace.BacktraceLine;
 import airbrake.stacktrace.JavaBacktraceLine;
+import airbrake.stacktrace.iOSBacktraceLine;
 
 public class BacktraceLineTest {
 
@@ -31,9 +32,20 @@ public class BacktraceLineTest {
 	}
 
 	@Test
-	@Ignore
 	public void testEscapeSpecialCharsInXml() {
 		BacktraceLine backtraceLine = new JavaBacktraceLine("at com.company.Foo$$FastClassByCGLIB$$b505b4f2.invoke(<generated'\">:-1)");
-		assertEquals("<line method=\"<indent> at com.company.Foo$$FastClassByCGLIB$$b505b4f2.invoke\" file=\"&lt;generated&apos;&quot;&gt;\" number=\"-1\"/>", backtraceLine.toXml());
+		assertEquals("<line method=\"com.company.Foo$$FastClassByCGLIB$$b505b4f2.invoke\" file=\"&#60;generated&#39;&#34;&#62;\" number=\"-1\"/>", backtraceLine.toXml());
+	}
+	
+	@Test
+	public void testiOSBacktraceLineFromString() {
+		BacktraceLine bl = new iOSBacktraceLine().acceptLine("95   CampTest                            0x000b719b -[ARPowerHookManager executeBlockWithId:data:context:withBlock:] + 358");
+		assertEquals("<line method=\"0x000b719b -[ARPowerHookManager executeBlockWithId:data:context:withBlock:] + 358\" file=\"CampTest\" number=\"\"/>", bl.toXml());
+	}
+	
+	@Test
+	public void testiOSBacktraceLineFromStringNoMemAddress() {
+		BacktraceLine bl = new iOSBacktraceLine(false).acceptLine("95   CampTest                            0x000b719b -[ARPowerHookManager executeBlockWithId:data:context:withBlock:] + 358");
+		assertEquals("<line method=\"-[ARPowerHookManager executeBlockWithId:data:context:withBlock:] + 358\" file=\"CampTest\" number=\"\"/>", bl.toXml());
 	}
 }
