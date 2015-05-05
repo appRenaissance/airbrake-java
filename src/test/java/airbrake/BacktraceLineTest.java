@@ -31,9 +31,8 @@ public class BacktraceLineTest {
 	}
 
 	@Test
-	@Ignore
 	public void testEscapeSpecialCharsInXml() {
 		BacktraceLine backtraceLine = new JavaBacktraceLine("at com.company.Foo$$FastClassByCGLIB$$b505b4f2.invoke(<generated'\">:-1)");
-		assertEquals("<line method=\"<indent> at com.company.Foo$$FastClassByCGLIB$$b505b4f2.invoke\" file=\"&lt;generated&apos;&quot;&gt;\" number=\"-1\"/>", backtraceLine.toXml());
+		assertEquals("<line method=\"com.company.Foo$$FastClassByCGLIB$$b505b4f2.invoke\" file=\"&#60;generated&#39;&#34;&#62;\" number=\"-1\"/>", backtraceLine.toXml());
 	}
 }
