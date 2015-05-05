@@ -19,7 +19,7 @@ public class iOSBacktraceLine implements BacktraceLine {
 	private String offset;
 	private Boolean showMemAddress = true;
 	
-	private static Pattern p = Pattern.compile("^[0-9]+[ ]*(?<crashlocation>[A-Za-z_.?]+)[ ]+(?<memaddress>[^ ]+)[ ]+(?<command>(?:.(?!\\+ [0-9]+$))+) \\+ (?<offset>[0-9]+)$");
+	private static Pattern p = Pattern.compile("^[0-9]+[ ]*([A-Za-z_.?]+)[ ]+([^ ]+)[ ]+((?:.(?!\\+ [0-9]+$))+) \\+ ([0-9]+)$");
 	
 	public iOSBacktraceLine() {}
 	
