@@ -91,6 +91,11 @@ public class NoticeApiXmlTest {
 	public void testEscapeXmlSingleQuotes() {
 		assertEquals(NoticeXml.escapeXml("'foo'"), "&#39;foo&#39;");
 	}
+	
+	@Test
+	public void testEscapeXmlAmpersand() {
+		assertEquals(NoticeXml.escapeXml("&foo"), "&#38;foo");
+	}
 
 	private String xml(NoticeXml noticeApi) {
 		return clean(noticeApi.toString());
