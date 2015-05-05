@@ -48,4 +48,10 @@ public class BacktraceLineTest {
 		BacktraceLine bl = new iOSBacktraceLine(false).acceptLine("95   CampTest                            0x000b719b -[ARPowerHookManager executeBlockWithId:data:context:withBlock:] + 358");
 		assertEquals("<line method=\"-[ARPowerHookManager executeBlockWithId:data:context:withBlock:] + 358\" file=\"CampTest\" number=\"\"/>", bl.toXml());
 	}
+	
+	@Test
+	public void testiOSBactraceLineFilenameWithNumbers() {
+		BacktraceLine bl = new iOSBacktraceLine().acceptLine("94   ArtisanDemo2                        0x000000010908b8dc -[ARPProductDetailViewController2 addToCart:] + 508");
+		assertEquals("<line method=\"0x000000010908b8dc -[ARPProductDetailViewController2 addToCart:] + 508\" file=\"ArtisanDemo2\" number=\"\"/>", bl.toXml());
+	}
 }
